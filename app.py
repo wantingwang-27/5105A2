@@ -3,7 +3,7 @@
 from flask import Flask, request, jsonify
 from sklearn.linear_model import LinearRegression
 import numpy as np
-import panda as pd
+import pandas as pd
 
 app = Flask(__name__)
 
