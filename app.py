@@ -20,17 +20,26 @@ df = pd.DataFrame(data)
 # Fit linear regression
 model = smf.ols('Y_obs ~ W + X', data=df).fit()
 
-@app.route("/predict")
 def predict():
-    x = float(request.args.get("x", 0))
-    y_pred = model.predict([[x]])[0]
+    # Get both W and X parameters from the request
+    w = float(request.args.get("W", 0))  # default to 0 if not provided
+    x = float(request.args.get("X", 0))  # default to 0 if not provided
+    
+    # Create a DataFrame for prediction (must match the model's formula structure)
+    new_data = pd.DataFrame({'W': [w], 'X': [x]})
+    
+    # Make prediction
+    y_pred = model.predict(new_data)[0]
     
     # Log prediction
-    with open("output.txt", "w") as f:
-        f.write(f"Input x: {x}\nPrediction: {y_pred}\n")
+    with open("output.txt", "a") as f:  # changed to append mode
+        f.write(f"Input W: {w}, X: {x}\nPrediction: {y_pred}\n\n")
     
-    return jsonify({"x": x, "prediction": y_pred})
+    return jsonify({
+        "input_W": w,
+        "input_X": x,
+        "prediction": y_pred
+    })
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
-
