@@ -20,6 +20,7 @@ df = pd.DataFrame(data)
 # Fit linear regression
 model = smf.ols('Y_obs ~ W + X', data=df).fit()
 
+@app.route("/predict")
 def predict():
     # Get both W and X parameters from the request
     w = float(request.args.get("W", 0))  # default to 0 if not provided
