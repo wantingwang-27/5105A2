@@ -1,0 +1,20 @@
+##Q1
+
+(a)
+α is  95.9662 
+τ is  -9.1057 
+β is  1.5149
+
+(b)
+estimated ATE (ˆτ ) is −9.11 which is significant with p < 0.001; 
+
+(c)
+ate is assumed to be unconfoundedness. This means there should be no unmeasured confounding variables (other than X) 
+that affect both treatment assignment (W) and the engagement score (Y).
+only if W and Y is random or unrelated to those other factors, we can trust the results.
+
+##Q2
+
+in README.md
+
+
